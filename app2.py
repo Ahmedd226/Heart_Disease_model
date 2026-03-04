@@ -160,23 +160,27 @@ if st.button("Predict Heart Disease Risk", type="primary", use_container_width=T
     st.subheader("📊 Model Insights: Clinical Impact Factors")
     
     try:
-        # CatBoost uses get_feature_importance()
+        # 1. Use 'model' to match the variable at the top of your script
         importances = model.get_feature_importance()
-        feature_names = df_final.columns
         
-        # Create and sort the importance DataFrame
+        # 2. Pull the names directly from the model's memory (no y_test needed!)
+        feature_names = model.feature_names_
+        
+        # 3. Create and sort the importance DataFrame
         importance_df = pd.DataFrame({
             'Factor': feature_names,
             'Impact Score': importances
         }).sort_values(by='Impact Score', ascending=False).head(10)
     
-        # Use a horizontal bar chart for better readability of labels
+        # 4. Display the chart
         st.bar_chart(importance_df.set_index('Factor'))
-        st.info("The chart above reveals the top 10 factors driving the AI's 95.5% accuracy. High impact scores indicate the features the model relies on most to determine heart disease risk.")
+        st.info("The chart above reveals the top 10 factors driving the AI's 95.5% accuracy.")
+        
     except Exception as e:
-        st.write("Feature importance is currently loading...")
+        # If it fails, this will print the EXACT reason in red on your app
+        st.error(f"Something broke in the chart: {e}")
     
-    
+
 
 
 
