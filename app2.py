@@ -110,11 +110,15 @@ if st.button("Predict Heart Disease Risk", type="primary", use_container_width=T
     
     # Display Results beautifully
     st.subheader("Results")
-    if probability > 0.5:
+    if probability > 0.7:
         st.error(f"⚠️ High Risk Detected! Estimated Probability: {probability * 100:.2f}%")
+        st.progress(float(probability))
+    elif probabiity > 0.4:
+        st.error(f"⚠️ Potential Risk Detected! Estimated Probability: {probability * 100:.2f}%")
         st.progress(float(probability))
     else:
         st.success(f"✅ Low Risk. Estimated Probability: {probability * 100:.2f}%")
 
         st.progress(float(probability))
+
 
