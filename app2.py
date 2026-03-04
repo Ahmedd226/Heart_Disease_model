@@ -15,7 +15,7 @@ with st.sidebar:
     **Accuracy:** 95.5% (ROC-AUC)
     
     **Algorithm:** Weighted Ensemble 
-    (XGBoost + CatBoost + LightGBM)
+    (XGBoost + CatBoost)
     
     **Features Used:** 13 Clinical Inputs + 6 Engineered Ratios.
     
@@ -117,3 +117,4 @@ if st.button("Predict Heart Disease Risk", type="primary", use_container_width=T
         st.success(f"✅ Low Risk. Estimated Probability: {probability * 100:.2f}%")
 
         st.progress(float(probability))
+
