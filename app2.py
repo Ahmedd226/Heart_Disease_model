@@ -155,31 +155,32 @@ if st.button("Predict Heart Disease Risk", type="primary", use_container_width=T
         use_container_width=True
     )
     
-    # --- FEATURE IMPORTANCE SECTION ---
-    st.markdown("---")
-    st.subheader("📊 Model Insights: Clinical Impact Factors")
+# --- FEATURE IMPORTANCE SECTION ---
+st.markdown("---")
+st.subheader("📊 Model Insights: Clinical Impact Factors")
+
+try:
+    # 1. Use 'model' to match the variable at the top of your script
+    importances = model.get_feature_importance()
     
-    try:
-        # 1. Use 'model' to match the variable at the top of your script
-        importances = model.get_feature_importance()
-        
-        # 2. Pull the names directly from the model's memory (no y_test needed!)
-        feature_names = model.feature_names_
-        
-        # 3. Create and sort the importance DataFrame
-        importance_df = pd.DataFrame({
-            'Factor': feature_names,
-            'Impact Score': importances
-        }).sort_values(by='Impact Score', ascending=False).head(10)
+    # 2. Pull the names directly from the model's memory (no y_test needed!)
+    feature_names = model.feature_names_
     
-        # 4. Display the chart
-        st.bar_chart(importance_df.set_index('Factor'))
-        st.info("The chart above reveals the top 10 factors driving the AI's 95.5% accuracy.")
-        
-    except Exception as e:
-        # If it fails, this will print the EXACT reason in red on your app
-        st.error(f"Something broke in the chart: {e}")
+    # 3. Create and sort the importance DataFrame
+    importance_df = pd.DataFrame({
+        'Factor': feature_names,
+        'Impact Score': importances
+    }).sort_values(by='Impact Score', ascending=False).head(10)
+
+    # 4. Display the chart
+    st.bar_chart(importance_df.set_index('Factor'))
+    st.info("The chart above reveals the top 10 factors driving the AI's 95.5% accuracy.")
     
+except Exception as e:
+    # If it fails, this will print the EXACT reason in red on your app
+    st.error(f"Something broke in the chart: {e}")
+
+
 
 
 
