@@ -6,6 +6,24 @@ import joblib
 # 1. Set up the page
 st.set_page_config(page_title="Heart Disease Predictor", page_icon="🫀", layout="centered")
 st.title("🫀 Heart Disease Risk Predictor")
+
+# --- SIDEBAR INFO ---
+with st.sidebar:
+    st.image("https://cdn-icons-png.flaticon.com/512/822/822143.png", width=100)
+    st.title("About the Model")
+    st.info("""
+    **Accuracy:** 95.5% (ROC-AUC)
+    
+    **Algorithm:** Weighted Ensemble 
+    (XGBoost + CatBoost + LightGBM)
+    
+    **Features Used:** 13 Clinical Inputs + 6 Engineered Ratios.
+    
+    *Disclaimer: This is a student project for educational purposes and should not be used as professional medical advice.*
+    """)
+    
+    st.success("✅ Model is Live & Stable")
+
 st.write("Enter the patient's clinical data below to predict the likelihood of heart disease.")
 
 # 2. Load the model (Streamlit caches this so it doesn't reload on every button click)
@@ -97,4 +115,5 @@ if st.button("Predict Heart Disease Risk", type="primary", use_container_width=T
         st.progress(float(probability))
     else:
         st.success(f"✅ Low Risk. Estimated Probability: {probability * 100:.2f}%")
+
         st.progress(float(probability))
