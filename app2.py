@@ -154,28 +154,29 @@ if st.button("Predict Heart Disease Risk", type="primary", use_container_width=T
         mime="text/plain",
         use_container_width=True
     )
-
-# --- FEATURE IMPORTANCE SECTION ---
-st.markdown("---")
-st.subheader("📊 Model Insights: Clinical Impact Factors")
-
-try:
-    # CatBoost uses get_feature_importance()
-    importances = model.get_feature_importance()
-    feature_names = df_final.columns
     
-    # Create and sort the importance DataFrame
-    importance_df = pd.DataFrame({
-        'Factor': feature_names,
-        'Impact Score': importances
-    }).sort_values(by='Impact Score', ascending=False).head(10)
-
-    # Use a horizontal bar chart for better readability of labels
-    st.bar_chart(importance_df.set_index('Factor'))
-    st.info("The chart above reveals the top 10 factors driving the AI's 95.5% accuracy. High impact scores indicate the features the model relies on most to determine heart disease risk.")
-except Exception as e:
-    st.write("Feature importance is currently loading...")
-
+    # --- FEATURE IMPORTANCE SECTION ---
+    st.markdown("---")
+    st.subheader("📊 Model Insights: Clinical Impact Factors")
+    
+    try:
+        # CatBoost uses get_feature_importance()
+        importances = model.get_feature_importance()
+        feature_names = df_final.columns
+        
+        # Create and sort the importance DataFrame
+        importance_df = pd.DataFrame({
+            'Factor': feature_names,
+            'Impact Score': importances
+        }).sort_values(by='Impact Score', ascending=False).head(10)
+    
+        # Use a horizontal bar chart for better readability of labels
+        st.bar_chart(importance_df.set_index('Factor'))
+        st.info("The chart above reveals the top 10 factors driving the AI's 95.5% accuracy. High impact scores indicate the features the model relies on most to determine heart disease risk.")
+    except Exception as e:
+        st.write("Feature importance is currently loading...")
+    
+    
 
 
 
