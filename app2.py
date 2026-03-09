@@ -174,7 +174,7 @@ if st.button("Predict Heart Disease Risk", type="primary", use_container_width=T
     
         # 4. Display the chart
         st.bar_chart(importance_df.set_index('Factor'))
-        st.info("The chart above reveals the top 10 factors driving the AI's 95.5% accuracy.")
+        st.info("The chart above reveals the top 10 important factors driving the model's prediction.")
         
     except Exception as e:
         # If it fails, this will print the EXACT reason in red on your app
@@ -184,3 +184,4 @@ if st.button("Predict Heart Disease Risk", type="primary", use_container_width=T
     
     
     
+
